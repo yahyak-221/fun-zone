@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>FunZone Games 🎮</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: radial-gradient(circle, #ffeaa7, #fab1a0);
+            color: #2d3436;
+        }
+
+        header {
+            background: linear-gradient(to right, #6c5ce7, #341f97);
+            color: white;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        nav a {
+            color: #f9ca24;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        nav a:hover {
+            color: #ffeaa7;
+        }
+
+        main {
+            padding: 30px 20px;
+        }
+
+        .box {
+            background: #fff0f6;
+            border-radius: 20px;
+            padding: 25px;
+            margin: 30px auto;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 600px;
+        }
+
+        button {
+            background: #e17055;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 18px;
+            border-radius: 25px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .count {
+            font-size: 45px;
+            font-weight: bold;
+            color: #6c5ce7;
+        }
+
+        input[type="number"] {
+            padding: 10px;
+            border-radius: 10px;
+            border: 2px solid #fd79a8;
+            font-size: 16px;
+            width: 60px;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        footer {
+            text-align: center;
+            background: linear-gradient(to right, #341f97, #6c5ce7);
+            color: white;
+            padding: 20px;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>🎮 Welcome to FunZone Mini Games</h1>
+        <nav>
+            <a href="./index.html">Home</a>
+            <a href="./index2.html">Games</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="box">
+            <h2>🥳 Click Counter Game</h2>
+            <p class="count" id="clickCount">0</p>
+            <button onclick="countClick()">Click Me!</button>
+        </div>
+
+        <div class="box">
+            <h2>🧠 Guess a Number (1–10)</h2>
+            <input type="number" id="guess" min="1" max="10" />
+            <button onclick="checkGuess()">Guess</button>
+            <p id="result">Can you beat the machine?</p>
+        </div>
+    </main>
+
+    <footer>
+        Let the games begin! 🚀 – FunZone © 2025
+    </footer>
+
+    <script>
+        let count = 0;
+        let secret = Math.floor(Math.random() * 10) + 1;
+
+        function countClick() {
+            document.getElementById("clickCount").textContent = ++count;
+        }
+
+        function checkGuess() {
+            const guess = +document.getElementById("guess").value;
+            const msg = document.getElementById("result");
+            msg.style.color = guess === secret ? "green" : "red";
+            msg.textContent = guess === secret
+                ? "🎉 You got it!"
+                : "❌ Nope, try again!";
+            if (guess === secret) secret = Math.floor(Math.random() * 10) + 1;
+        }
+    </script>
+</body>
+
+</html>
