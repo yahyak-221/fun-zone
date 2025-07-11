@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Menu & FAQ - Waffle World</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #fffaf5;
+            color: #1a1a1a;
+        }
+
+        .ww-navbar {
+            background: #ffc76b;
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .ww-brand {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .ww-nav-links {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .ww-nav-links a,
+        #toggle-theme {
+            text-decoration: none;
+            font-weight: 500;
+            color: #1a1a1a;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .ww-menu {
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .ww-cards {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .ww-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            width: 260px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .ww-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .ww-card h3 {
+            margin: 1rem 0 0.5rem;
+        }
+
+        .ww-card p {
+            color: #f27059;
+            font-weight: bold;
+        }
+
+        .ww-faq {
+            padding: 4rem 2rem;
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .ww-faq h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .ww-faq-item {
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 1rem;
+        }
+
+        .ww-faq-question {
+            font-weight: 600;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .ww-faq-question:hover {
+            color: #f27059;
+        }
+
+        .ww-faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: max-height 0.4s ease, opacity 0.4s ease;
+        }
+
+        .ww-faq-answer.active {
+            max-height: 200px;
+            opacity: 1;
+            margin-top: 0.5rem;
+        }
+
+        .ww-footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            background: #ffc76b;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="ww-navbar">
+            <h1 class="ww-brand">Waffle World</h1>
+            <ul class="ww-nav-links">
+                <li><a href="./index.html">Home</a></li>
+                <li><a href="./menu.html">Menu & FAQ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="ww-menu">
+        <h2>Our Menu</h2>
+        <div class="ww-cards">
+            <div class="ww-card">
+                <img src="images/choco-waffle.jpg" alt="Chocolate Waffle" />
+                <h3>Chocolate Waffle</h3>
+                <p>₹150</p>
+            </div>
+            <div class="ww-card">
+                <img src="images/fruit-waffle.jpg" alt="Fruit Waffle" />
+                <h3>Fruit Delight</h3>
+                <p>₹170</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="ww-faq">
+        <h2>Frequently Asked Questions</h2>
+        <div class="ww-faq-item">
+            <h4 class="ww-faq-question">Do you offer vegan options?</h4>
+            <p class="ww-faq-answer">Yes! We have delicious vegan waffles made with plant-based ingredients.</p>
+        </div>
+        <div class="ww-faq-item">
+            <h4 class="ww-faq-question">Do you deliver?</h4>
+            <p class="ww-faq-answer">Yes, delivery is available within 5 km radius from our store.</p>
+        </div>
+    </section>
+
+    <footer class="ww-footer">
+        <p>© 2025 Waffle World</p>
+    </footer>
+
+    <script>
+        // Dark mode toggle
+        const toggleTheme = document.getElementById("toggle-theme");
+        if (toggleTheme) {
+            toggleTheme.addEventListener("click", () => {
+                document.body.classList.toggle("dark-mode");
+            });
+        }
+
+        // FAQ slide toggle
+        document.querySelectorAll(".ww-faq-question").forEach(question => {
+            question.addEventListener("click", () => {
+                const answer = question.nextElementSibling;
+                const isActive = answer.classList.contains("active");
+
+                document.querySelectorAll(".ww-faq-answer").forEach(ans => {
+                    ans.classList.remove("active");
+                    ans.style.maxHeight = null;
+                });
+
+                if (!isActive) {
+                    answer.classList.add("active");
+                    answer.style.maxHeight = answer.scrollHeight + "px";
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
