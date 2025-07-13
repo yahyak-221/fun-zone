@@ -1,9 +1,45 @@
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #fffaf5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  transition: opacity 0.5s ease, visibility 0.5s;
+}
+
+.loader {
+  border: 6px solid #ffc76b;
+  border-top: 6px solid #f27059;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+#preloader.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* style-menu.css */
 body {
   font-family: "Poppins", sans-serif;
   margin: 0;
   padding: 0;
   background: #fffaf5;
   color: #1a1a1a;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 .ww-navbar {
@@ -12,6 +48,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  transition: background 0.3s ease;
 }
 
 .ww-brand {
@@ -34,6 +71,7 @@ body {
   border: none;
   cursor: pointer;
   font-size: 1rem;
+  transition: color 0.3s ease;
 }
 
 .ww-menu {
@@ -54,7 +92,19 @@ body {
   padding: 1.5rem;
   width: 260px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s;
+  transition: transform 0.4s ease, opacity 0.6s ease;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.ww-card.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.ww-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
 .ww-card img {
@@ -117,4 +167,5 @@ body {
   text-align: center;
   padding: 2rem 1rem;
   background: #ffc76b;
+  transition: background 0.3s ease;
 }

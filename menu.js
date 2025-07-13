@@ -23,3 +23,27 @@ document.querySelectorAll(".ww-faq-question").forEach((question) => {
     }
   });
 });
+
+// Card fade-in animation on scroll
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("fade-in");
+        observer.unobserve(entry.target);
+      }
+    });
+  },
+  {
+    threshold: 0.2,
+  }
+);
+
+document.querySelectorAll(".ww-card").forEach((card) => {
+  observer.observe(card);
+});
+
+window.addEventListener("load", () => {
+  const preloader = document.getElementById("preloader");
+  preloader.classList.add("hidden");
+});

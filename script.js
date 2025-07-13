@@ -1,3 +1,45 @@
+// Preloader hide with fade animation
+window.addEventListener("load", () => {
+  const preloader = document.getElementById("preloader");
+  if (preloader) {
+    preloader.classList.add("hidden");
+    setTimeout(() => {
+      preloader.style.display = "none";
+    }, 600);
+  }
+});
+
+// Intersection Observer for scroll-based animation
+const observer = new IntersectionObserver(
+  (entries, observer) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("fade-in-up");
+        observer.unobserve(entry.target);
+      }
+    });
+  },
+  {
+    threshold: 0.1,
+  }
+);
+
+const regularElements = document.querySelectorAll(
+  ".ww-card, .ww-flavor-card, .ww-reasons div, .ww-location-list div"
+);
+regularElements.forEach((el, i) => {
+  el.style.opacity = 0;
+  el.style.animationDelay = `${i * 0.1}s`;
+  observer.observe(el);
+});
+
+const reviewElements = document.querySelectorAll(".ww-review");
+reviewElements.forEach((el, i) => {
+  el.style.opacity = 0;
+  el.style.animationDelay = `${i * 0.05}s`; // Trigger reviews earlier
+  observer.observe(el);
+});
+
 // Dark mode toggle
 const toggleTheme = document.getElementById("toggle-theme");
 if (toggleTheme) {
@@ -6,28 +48,25 @@ if (toggleTheme) {
   });
 }
 
-// FAQ toggle with animation
-document.addEventListener("DOMContentLoaded", () => {
-  const questions = document.querySelectorAll(".ww-faq-question");
+// FAQ question toggle with animation
+document.querySelectorAll(".ww-faq-question").forEach((question) => {
+  question.addEventListener("click", () => {
+    const answer = question.nextElementSibling;
+    const isActive = answer.classList.contains("active");
 
-  questions.forEach((question) => {
-    question.addEventListener("click", () => {
-      const answer = question.nextElementSibling;
-
-      if (answer.classList.contains("active")) {
-        answer.style.maxHeight = "0";
-        answer.style.opacity = "0";
-        answer.classList.remove("active");
-      } else {
-        answer.style.maxHeight = answer.scrollHeight + "px";
-        answer.style.opacity = "1";
-        answer.classList.add("active");
-      }
+    document.querySelectorAll(".ww-faq-answer").forEach((ans) => {
+      ans.classList.remove("active");
+      ans.style.maxHeight = null;
     });
+
+    if (!isActive) {
+      answer.classList.add("active");
+      answer.style.maxHeight = answer.scrollHeight + "px";
+    }
   });
 });
 
-// Smooth slider (if used elsewhere)
+// Smooth image slider with slight parallax effect
 const images = [
   "images/waffle1.jpg",
   "images/waffle2.jpg",
@@ -53,6 +92,15 @@ function showNextImage() {
 }
 
 if (sliderImage) {
-  sliderImage.style.transition = "opacity 0.9s ease";
+  sliderImage.style.transition = "opacity 0.9s ease, transform 0.5s ease";
   setInterval(showNextImage, 3000);
+  window.addEventListener("scroll", () => {
+    const scrollY = window.scrollY;
+    sliderImage.style.transform = `translateY(${scrollY * 0.02}px)`;
+  });
 }
+
+// Mobile menu toggle
+document.getElementById("hamburger").addEventListener("click", function () {
+  document.getElementById("navLinks").classList.toggle("active");
+});
