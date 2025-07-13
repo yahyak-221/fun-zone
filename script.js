@@ -40,7 +40,7 @@ reviewElements.forEach((el, i) => {
   observer.observe(el);
 });
 
-// Dark mode toggle
+// New clean sticky navbar logic
 const toggleTheme = document.getElementById("toggle-theme");
 if (toggleTheme) {
   toggleTheme.addEventListener("click", () => {
@@ -100,7 +100,13 @@ if (sliderImage) {
   });
 }
 
-// Mobile menu toggle
-document.getElementById("hamburger").addEventListener("click", function () {
-  document.getElementById("navLinks").classList.toggle("active");
-});
+// Fix mobile menu toggle
+const hamburger = document.getElementById("hamburger");
+const navLinks = document.getElementById("navLinks");
+
+if (hamburger && navLinks) {
+  hamburger.addEventListener("click", () => {
+    navLinks.classList.toggle("active");
+    hamburger.classList.toggle("open");
+  });
+}
